@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.fly5.sjsu.edu" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.fly5.sjsu.edu" xmlns:intf="http://services.fly5.sjsu.edu" xmlns:tns1="http://pojos.fly5.sjsu.edu" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://pojos.fly5.sjsu.edu"/>
+   <element name="searchEmployeesBasedOnAttributes">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="attributes" type="tns1:Attribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchEmployeesBasedOnAttributesResponse">
+    <complexType>
+     <sequence>
+      <element name="searchEmployeesBasedOnAttributesReturn" type="tns1:Employee"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addEmployee">
+    <complexType>
+     <sequence>
+      <element name="employee" type="tns1:Employee"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addEmployeeResponse">
+    <complexType>
+     <sequence>
+      <element name="addEmployeeReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="listEmployees">
+    <complexType/>
+   </element>
+   <element name="listEmployeesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="listEmployeesReturn" type="tns1:Employee"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewEmployeeInfo">
+    <complexType>
+     <sequence>
+      <element name="employeeID" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewEmployeeInfoResponse">
+    <complexType>
+     <sequence>
+      <element name="viewEmployeeInfoReturn" type="tns1:Employee"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateEmployee">
+    <complexType>
+     <sequence>
+      <element name="employee" type="tns1:Employee"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateEmployeeResponse">
+    <complexType>
+     <sequence>
+      <element name="updateEmployeeReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeEmployee">
+    <complexType>
+     <sequence>
+      <element name="employeeID" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeEmployeeResponse">
+    <complexType>
+     <sequence>
+      <element name="removeEmployeeReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://pojos.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Attribute">
+    <sequence>
+     <element name="attributeName" nillable="true" type="xsd:string"/>
+     <element name="attributeValue" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Employee">
+    <sequence>
+     <element name="crewID" type="xsd:long"/>
+     <element name="designation" nillable="true" type="xsd:string"/>
+     <element name="employeeID" nillable="true" type="xsd:string"/>
+     <element name="hireDate" nillable="true" type="xsd:dateTime"/>
+     <element name="personID" nillable="true" type="xsd:string"/>
+     <element name="workDescription" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="addEmployeeResponse">
+
+      <wsdl:part element="impl:addEmployeeResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchEmployeesBasedOnAttributesRequest">
+
+      <wsdl:part element="impl:searchEmployeesBasedOnAttributes" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchEmployeesBasedOnAttributesResponse">
+
+      <wsdl:part element="impl:searchEmployeesBasedOnAttributesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewEmployeeInfoRequest">
+
+      <wsdl:part element="impl:viewEmployeeInfo" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateEmployeeResponse">
+
+      <wsdl:part element="impl:updateEmployeeResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeEmployeeRequest">
+
+      <wsdl:part element="impl:removeEmployee" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewEmployeeInfoResponse">
+
+      <wsdl:part element="impl:viewEmployeeInfoResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addEmployeeRequest">
+
+      <wsdl:part element="impl:addEmployee" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listEmployeesResponse">
+
+      <wsdl:part element="impl:listEmployeesResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateEmployeeRequest">
+
+      <wsdl:part element="impl:updateEmployee" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeEmployeeResponse">
+
+      <wsdl:part element="impl:removeEmployeeResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listEmployeesRequest">
+
+      <wsdl:part element="impl:listEmployees" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EmployeeService">
+
+      <wsdl:operation name="searchEmployeesBasedOnAttributes">
+
+         <wsdl:input message="impl:searchEmployeesBasedOnAttributesRequest" name="searchEmployeesBasedOnAttributesRequest"/>
+
+         <wsdl:output message="impl:searchEmployeesBasedOnAttributesResponse" name="searchEmployeesBasedOnAttributesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addEmployee">
+
+         <wsdl:input message="impl:addEmployeeRequest" name="addEmployeeRequest"/>
+
+         <wsdl:output message="impl:addEmployeeResponse" name="addEmployeeResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listEmployees">
+
+         <wsdl:input message="impl:listEmployeesRequest" name="listEmployeesRequest"/>
+
+         <wsdl:output message="impl:listEmployeesResponse" name="listEmployeesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viewEmployeeInfo">
+
+         <wsdl:input message="impl:viewEmployeeInfoRequest" name="viewEmployeeInfoRequest"/>
+
+         <wsdl:output message="impl:viewEmployeeInfoResponse" name="viewEmployeeInfoResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateEmployee">
+
+         <wsdl:input message="impl:updateEmployeeRequest" name="updateEmployeeRequest"/>
+
+         <wsdl:output message="impl:updateEmployeeResponse" name="updateEmployeeResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeEmployee">
+
+         <wsdl:input message="impl:removeEmployeeRequest" name="removeEmployeeRequest"/>
+
+         <wsdl:output message="impl:removeEmployeeResponse" name="removeEmployeeResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EmployeeServiceSoapBinding" type="impl:EmployeeService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="searchEmployeesBasedOnAttributes">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchEmployeesBasedOnAttributesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchEmployeesBasedOnAttributesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addEmployee">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addEmployeeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addEmployeeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listEmployees">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listEmployeesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listEmployeesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viewEmployeeInfo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="viewEmployeeInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="viewEmployeeInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateEmployee">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateEmployeeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateEmployeeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeEmployee">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeEmployeeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeEmployeeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EmployeeServiceService">
+
+      <wsdl:port binding="impl:EmployeeServiceSoapBinding" name="EmployeeService">
+
+         <wsdlsoap:address location="http://localhost:8080/fly5Project/services/EmployeeService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.fly5.sjsu.edu" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.fly5.sjsu.edu" xmlns:intf="http://services.fly5.sjsu.edu" xmlns:tns1="http://pojos.fly5.sjsu.edu" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://pojos.fly5.sjsu.edu"/>
+   <element name="updateFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flight" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateFlightDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="updateFlightDetailsReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flightId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteFlightDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="deleteFlightDetailsReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flight" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addFlightDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="addFlightDetailsReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flightId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewFlightDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="viewFlightDetailsReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="listFlights">
+    <complexType/>
+   </element>
+   <element name="listFlightsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="listFlightsReturn" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchFlight">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="searchAttributes" type="tns1:Attribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchFlightResponse">
+    <complexType>
+     <sequence>
+      <element name="searchFlightReturn" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://pojos.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Flight">
+    <sequence>
+     <element name="arrivalTime" nillable="true" type="xsd:string"/>
+     <element name="availibilityDays" nillable="true" type="xsd:string"/>
+     <element name="baseFare" type="xsd:double"/>
+     <element name="crewID" type="xsd:long"/>
+     <element name="departureTime" nillable="true" type="xsd:string"/>
+     <element name="destination" nillable="true" type="xsd:string"/>
+     <element name="distance" type="xsd:long"/>
+     <element name="flightID" nillable="true" type="xsd:string"/>
+     <element name="flightStatus" nillable="true" type="xsd:string"/>
+     <element name="noOfSeats" type="xsd:long"/>
+     <element name="source" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Attribute">
+    <sequence>
+     <element name="attributeName" nillable="true" type="xsd:string"/>
+     <element name="attributeValue" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="listFlightsRequest">
+
+      <wsdl:part element="impl:listFlights" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchFlightRequest">
+
+      <wsdl:part element="impl:searchFlight" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewFlightDetailsResponse">
+
+      <wsdl:part element="impl:viewFlightDetailsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addFlightDetailsRequest">
+
+      <wsdl:part element="impl:addFlightDetails" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewFlightDetailsRequest">
+
+      <wsdl:part element="impl:viewFlightDetails" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addFlightDetailsResponse">
+
+      <wsdl:part element="impl:addFlightDetailsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteFlightDetailsRequest">
+
+      <wsdl:part element="impl:deleteFlightDetails" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteFlightDetailsResponse">
+
+      <wsdl:part element="impl:deleteFlightDetailsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateFlightDetailsResponse">
+
+      <wsdl:part element="impl:updateFlightDetailsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="listFlightsResponse">
+
+      <wsdl:part element="impl:listFlightsResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateFlightDetailsRequest">
+
+      <wsdl:part element="impl:updateFlightDetails" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchFlightResponse">
+
+      <wsdl:part element="impl:searchFlightResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="FlightService">
+
+      <wsdl:operation name="updateFlightDetails">
+
+         <wsdl:input message="impl:updateFlightDetailsRequest" name="updateFlightDetailsRequest"/>
+
+         <wsdl:output message="impl:updateFlightDetailsResponse" name="updateFlightDetailsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteFlightDetails">
+
+         <wsdl:input message="impl:deleteFlightDetailsRequest" name="deleteFlightDetailsRequest"/>
+
+         <wsdl:output message="impl:deleteFlightDetailsResponse" name="deleteFlightDetailsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addFlightDetails">
+
+         <wsdl:input message="impl:addFlightDetailsRequest" name="addFlightDetailsRequest"/>
+
+         <wsdl:output message="impl:addFlightDetailsResponse" name="addFlightDetailsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viewFlightDetails">
+
+         <wsdl:input message="impl:viewFlightDetailsRequest" name="viewFlightDetailsRequest"/>
+
+         <wsdl:output message="impl:viewFlightDetailsResponse" name="viewFlightDetailsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listFlights">
+
+         <wsdl:input message="impl:listFlightsRequest" name="listFlightsRequest"/>
+
+         <wsdl:output message="impl:listFlightsResponse" name="listFlightsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchFlight">
+
+         <wsdl:input message="impl:searchFlightRequest" name="searchFlightRequest"/>
+
+         <wsdl:output message="impl:searchFlightResponse" name="searchFlightResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="FlightServiceSoapBinding" type="impl:FlightService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="updateFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viewFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="viewFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="viewFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listFlights">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listFlightsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listFlightsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchFlight">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchFlightRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchFlightResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="FlightServiceService">
+
+      <wsdl:port binding="impl:FlightServiceSoapBinding" name="FlightService">
+
+         <wsdlsoap:address location="http://localhost:8080/fly5Project/services/FlightService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
