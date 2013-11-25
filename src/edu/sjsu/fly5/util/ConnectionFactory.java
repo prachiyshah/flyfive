@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import edu.sjsu.fly5.util.ApplicationProperties;
+
 public class ConnectionFactory {
 
 	private String connectionUrl; 
@@ -30,16 +32,16 @@ public class ConnectionFactory {
 	}
 
 	private void init(){
-		driver ="com.mysql.jdbc.Driver";
-		connectionUrl = "jdbc:mysql://localhost:3306/fly5";
-		user = "root";
-		password = "admin";
+		driver = ApplicationProperties.getProperty("driver");
+		connectionUrl = ApplicationProperties.getProperty("url");
+		user = ApplicationProperties.getProperty("user");
+		password = ApplicationProperties.getProperty("password");
 	}
 
 	public Connection getConnection() throws Fly5Exception{
 		Connection con = null;
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fly5","root","admin");
+			con = DriverManager.getConnection(connectionUrl,user,password);
 		} catch (SQLException e) {
 			throw new Fly5Exception(null, e);
 		}
