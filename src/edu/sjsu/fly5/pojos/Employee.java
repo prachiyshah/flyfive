@@ -1,11 +1,11 @@
 package edu.sjsu.fly5.pojos;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Employee 
 {
 
-	private String employeeID;
+	private long employeeID;
 	private String workDescription;
 	private String designation;
 	private Date hireDate;
@@ -21,8 +21,11 @@ public class Employee
 
 
 
-	public Employee(String employeeID, String workDescription,String designation, Date hireDate, long crewID, String personID) 
-	{
+	
+	
+	
+	public Employee(long employeeID, String workDescription,
+			String designation, Date hireDate, long crewID, String personID) {
 		super();
 		this.employeeID = employeeID;
 		this.workDescription = workDescription;
@@ -34,14 +37,25 @@ public class Employee
 
 
 
-	public String getEmployeeID() {
+
+
+
+	public long getEmployeeID() {
 		return employeeID;
 	}
 
 
-	public void setEmployeeID(String employeeID) {
+
+
+
+
+	public void setEmployeeID(long employeeID) {
 		this.employeeID = employeeID;
 	}
+
+
+
+
 
 
 	public String getWorkDescription() {
