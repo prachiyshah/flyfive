@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EmployeeServiceService WSDL service -->
+
+  <service name="EmployeeService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+      <parameter name="wsdlServiceElement" value="EmployeeServiceService"/>
+      <parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+      <parameter name="wsdlServicePort" value="EmployeeService"/>
+      <parameter name="className" value="edu.sjsu.fly5.services.EmployeeService"/>
+      <parameter name="wsdlPortType" value="EmployeeService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addEmployee" qname="operNS:addEmployee" returnQName="retNS:addEmployeeReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:employee" type="tns:Employee"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateEmployee" qname="operNS:updateEmployee" returnQName="retNS:updateEmployeeReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:employee" type="tns:Employee"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeEmployee" qname="operNS:removeEmployee" returnQName="retNS:removeEmployeeReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:employeeID" type="tns:long"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="listEmployees" qname="operNS:listEmployees" returnQName="retNS:listEmployeesReturn" returnType="rtns:Employee" soapAction="">
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="searchEmployeesBasedOnAttributes" qname="operNS:searchEmployeesBasedOnAttributes" returnQName="retNS:searchEmployeesBasedOnAttributesReturn" returnType="rtns:Employee" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:attributes" type="tns:Attribute"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="viewEmployeeInfo" qname="operNS:viewEmployeeInfo" returnQName="retNS:viewEmployeeInfoReturn" returnType="rtns:Employee" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:employeeID" type="tns:long"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <parameter name="allowedMethods" value="removeEmployee searchEmployeesBasedOnAttributes updateEmployee viewEmployeeInfo listEmployees addEmployee"/>
+
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Attribute" type="java:edu.sjsu.fly5.pojos.Attribute" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://util.fly5.sjsu.edu" qname="ns:Fly5Exception" type="java:edu.sjsu.fly5.util.Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Employee" type="java:edu.sjsu.fly5.pojos.Employee" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://util.fly5.sjsu.edu" qname="ns:FaultBean" type="java:edu.sjsu.fly5.util.FaultBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

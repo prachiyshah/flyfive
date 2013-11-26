@@ -1,0 +1,88 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\parthshah\Desktop\Fly5ProjectStart\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\fly5\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="EmployeeService" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="addEmployee" qname="ns1:addEmployee" returnQName="ns1:addEmployeeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:employee" type="ns2:Employee" xmlns:ns2="http://pojos.fly5.sjsu.edu" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+   <ns2:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns1:fault" type="ns3:Fly5Exception" xmlns:ns3="http://util.fly5.sjsu.edu"/>
+  </ns2:operation>
+  <ns1:operation name="updateEmployee" qname="ns4:updateEmployee" returnQName="ns4:updateEmployeeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns4="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:employee" type="ns5:Employee" xmlns:ns5="http://pojos.fly5.sjsu.edu"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns4:fault" type="ns6:Fly5Exception" xmlns:ns6="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="removeEmployee" qname="ns7:removeEmployee" returnQName="ns7:removeEmployeeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:employeeID" type="xsd:long"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns7:fault" type="ns8:Fly5Exception" xmlns:ns8="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="listEmployees" qname="ns9:listEmployees" returnQName="ns9:listEmployeesReturn" returnType="ns10:Employee" soapAction="" xmlns:ns10="http://pojos.fly5.sjsu.edu" xmlns:ns9="http://services.fly5.sjsu.edu">
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns9:fault" type="ns11:Fly5Exception" xmlns:ns11="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="searchEmployeesBasedOnAttributes" qname="ns12:searchEmployeesBasedOnAttributes" returnQName="ns12:searchEmployeesBasedOnAttributesReturn" returnType="ns13:Employee" soapAction="" xmlns:ns12="http://services.fly5.sjsu.edu" xmlns:ns13="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns12:attributes" type="ns13:Attribute"/>
+  </ns1:operation>
+  <ns1:operation name="viewEmployeeInfo" qname="ns14:viewEmployeeInfo" returnQName="ns14:viewEmployeeInfoReturn" returnType="ns15:Employee" soapAction="" xmlns:ns14="http://services.fly5.sjsu.edu" xmlns:ns15="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns14:employeeID" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns14:fault" type="ns16:Fly5Exception" xmlns:ns16="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="removeEmployee searchEmployeesBasedOnAttributes updateEmployee viewEmployeeInfo listEmployees addEmployee"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="EmployeeService"/>
+  <ns1:parameter name="className" value="edu.sjsu.fly5.services.EmployeeService"/>
+  <ns1:parameter name="wsdlServicePort" value="EmployeeService"/>
+  <ns1:parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlServiceElement" value="EmployeeServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns17:Attribute" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Attribute" xmlns:ns17="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns18:Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.Fly5Exception" xmlns:ns18="http://util.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns19:Employee" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Employee" xmlns:ns19="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns20:FaultBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.FaultBean" xmlns:ns20="http://util.fly5.sjsu.edu"/>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

@@ -1,4 +1,5 @@
 package edu.sjsu.fly5.services;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class EmployeeService implements Messages
 		return flag;
 
 	}
-	public boolean updateEmployee(Employee employee) throws Fly5Exception
+	public boolean updateEmployee(Employee employee) throws Fly5Exception, ParseException
 	{
 		boolean flag=false;
 		flag=employeeDao.updateEmployee(employee);
@@ -40,7 +41,7 @@ public class EmployeeService implements Messages
 		flag=employeeDao.removeEmployee(employeeID);
 		return flag;
 	}
-	public Employee[] listEmployees() throws Fly5Exception
+	public Employee[] listEmployees() throws Fly5Exception, ParseException
 	{
 		List<Employee> listOfEmployees=new ArrayList<Employee>();
 		

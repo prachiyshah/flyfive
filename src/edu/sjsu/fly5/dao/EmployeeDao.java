@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,11 +30,15 @@ public class EmployeeDao implements Messages
 		PreparedStatement ps=null;
 		try
 		{
+			java.util.Date myDate = new Date();
+			java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());
+
+
 			con=ConnectionFactory.getInstance().getConnection();
 			ps=con.prepareStatement(query);
 			ps.setString(1,employee.getWorkDescription());
 			ps.setString(2,employee.getDesignation());
-			ps.setDate(3,employee.getHireDate());
+			ps.setDate(3,sqlDate);
 			ps.setLong(4, employee.getCrewID());
 			
 			int i=ps.executeUpdate();
@@ -54,7 +61,7 @@ public class EmployeeDao implements Messages
 		
 	}
 	
-	public List<Employee> listEmployees() throws Fly5Exception
+	public List<Employee> listEmployees() throws Fly5Exception, ParseException
 	{
 		List<Employee> listOfEmployees=new ArrayList<Employee>();
 		String query="select * from Employee";
@@ -71,7 +78,7 @@ public class EmployeeDao implements Messages
 			employee.setEmployeeID(rs.getLong(1));
 			employee.setWorkDescription(rs.getString(2));
 			employee.setDesignation(rs.getString(3));
-			employee.setHireDate(rs.getDate(4));
+			employee.setHireDate(rs.getDate(4).toString());
 			employee.setCrewID(rs.getLong(5));
 			listOfEmployees.add(employee);
 			}
@@ -100,6 +107,7 @@ public class EmployeeDao implements Messages
 		{
 			con=ConnectionFactory.getInstance().getConnection();
 			ps=con.prepareStatement(query);
+			ps.setLong(1, employeeID);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next())
 			{
@@ -107,7 +115,7 @@ public class EmployeeDao implements Messages
 				employee.setEmployeeID(rs.getLong(1));
 				employee.setWorkDescription(rs.getString(2));
 				employee.setDesignation(rs.getString(3));
-				employee.setHireDate(rs.getDate(4));
+				employee.setHireDate(rs.getDate(4).toString());
 				employee.setCrewID(rs.getLong(5));
 				
 			}
@@ -126,19 +134,23 @@ public class EmployeeDao implements Messages
 		return employee;
 	}
 	
-	public boolean updateEmployee(Employee employee) throws Fly5Exception
+	public boolean updateEmployee(Employee employee) throws Fly5Exception, ParseException
 	{
 		boolean flag=false;
-		String query="update Employee set work_description = ?, position =? ,hire_date = ?, crew_id = ? where employee_id = ?)";
+		String query="update Employee set work_description = ?, position =? ,hire_date = ?, crew_id = ? where employee_id = ?";
 		Connection con=null;
 		PreparedStatement ps=null;
 		try
 		{
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	        Date parsed = format.parse(employee.getHireDate());
+	        java.sql.Date sql = new java.sql.Date(parsed.getTime());
+
 			con=ConnectionFactory.getInstance().getConnection();
 			ps=con.prepareStatement(query);
 			ps.setString(1,employee.getWorkDescription());
 			ps.setString(2,employee.getDesignation());
-			ps.setDate(3,employee.getHireDate());
+			ps.setDate(3,sql);
 			ps.setLong(4, employee.getCrewID());
 			ps.setLong(5, employee.getEmployeeID());
 			
@@ -164,7 +176,7 @@ public class EmployeeDao implements Messages
 	public boolean removeEmployee(long employeeID) throws Fly5Exception
 	{
 		boolean flag=false;
-		String query="delete from Employee where employee_id = ?)";
+		String query="delete from Employee where employee_id = ?";
 		Connection con=null;
 		PreparedStatement ps=null;
 		try
