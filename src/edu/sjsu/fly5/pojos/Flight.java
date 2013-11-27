@@ -15,9 +15,27 @@ private double baseFare;
 private long crewID;
 private long distance;
 private String availibilityDays;
+private String frequency;
+private String airline;
 
 
 
+
+public String getAirline() {
+	return airline;
+}
+
+public void setAirline(String airline) {
+	this.airline = airline;
+}
+
+public String getFrequency() {
+	return frequency;
+}
+
+public void setFrequency(String frequency) {
+	this.frequency = frequency;
+}
 
 public Flight() {
 	super();
