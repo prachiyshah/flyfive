@@ -18,4 +18,9 @@ public class FaultBean {
 	public FaultBean(String message) {
         faultMessage = message;
 	}
+	
+	public FaultBean(String message, Object... args){
+        if (args != null)
+		  this.faultMessage = String.format(message, args);
+	}
 }
