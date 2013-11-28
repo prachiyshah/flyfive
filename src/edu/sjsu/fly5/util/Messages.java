@@ -10,4 +10,5 @@ public interface Messages {
 	public String EXC105 = "Credit card number should be of 16 digits.";
 	public String EXC106 = "Invalid CVV.";
 	public String EXC107 = "Invalid Expiry date for Credit card.";
+	public String EXC108 = "Server side Exception";
 }
