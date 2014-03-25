@@ -1,0 +1,69 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CrewServiceService WSDL service -->
+
+  <service name="CrewService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+      <parameter name="wsdlServiceElement" value="CrewServiceService"/>
+      <parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+      <parameter name="wsdlServicePort" value="CrewService"/>
+      <parameter name="className" value="edu.sjsu.fly5.services.CrewServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="CrewService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="viewCrewDetails" qname="operNS:viewCrewDetails" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:viewCrewDetailsReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:Crew" xmlns:rtns="http://pojos.fly5.sjsu.edu" soapAction="" >
+        <parameter qname="pns:crewID" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="updateCrew" qname="operNS:updateCrew" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:updateCrewReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:crew" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:Crew" xmlns:tns="http://pojos.fly5.sjsu.edu"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="removeCrew" qname="operNS:removeCrew" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:removeCrewReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:crewID" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="addCrew" qname="operNS:addCrew" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:addCrewReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:crewName" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="listcrews" qname="operNS:listcrews" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:listcrewsReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:Crew" xmlns:rtns="http://pojos.fly5.sjsu.edu" soapAction="" >
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <parameter name="allowedMethods" value="listcrews updateCrew addCrew removeCrew viewCrewDetails"/>
+
+      <typeMapping
+        xmlns:ns="http://util.fly5.sjsu.edu"
+        qname="ns:Fly5Exception"
+        type="java:edu.sjsu.fly5.util.Fly5Exception"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://util.fly5.sjsu.edu"
+        qname="ns:FaultBean"
+        type="java:edu.sjsu.fly5.util.FaultBean"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://pojos.fly5.sjsu.edu"
+        qname="ns:Crew"
+        type="java:edu.sjsu.fly5.pojos.Crew"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

@@ -45,17 +45,20 @@ public class EmployeeService implements Messages
 	{
 		List<Employee> listOfEmployees=new ArrayList<Employee>();
 		
-		listOfEmployees=employeeDao.listEmployees();
+		listOfEmployees=employeeDao.listOfEmployees();
 		
 		return listOfEmployees.toArray(new Employee[listOfEmployees.size()]);
 
 	}
-	public Employee searchEmployeesBasedOnAttributes(Attribute[] attributes)
+		
+	
+	public Employee[] searchEmployeesBasedOnAttributes(Attribute[] attributes) throws Fly5Exception
 	{
-		Employee employee=null;
-
-
-		return employee;
+		List<Employee> listOfEmployees=new ArrayList<Employee>();
+		
+		listOfEmployees=employeeDao.searchEmployeesBasedOnAttributes(attributes);
+		
+		return listOfEmployees.toArray(new Employee[listOfEmployees.size()]);
 	}
 	public Employee viewEmployeeInfo(long employeeID) throws Fly5Exception
 	{

@@ -1,46 +1,62 @@
 package edu.sjsu.fly5.services;
 
+import java.text.ParseException;
+
 import javax.jws.WebService;
 
+import edu.sjsu.fly5.dao.TravellerDao;
+import edu.sjsu.fly5.pojos.Person;
 import edu.sjsu.fly5.pojos.Traveller;
+import edu.sjsu.fly5.util.Fly5Exception;
 
 
 
 @WebService
 public class TravellerService 
 {
-
-	public Traveller[] listTravellers()
+	private TravellerDao travellerDao;
+	
+	public TravellerService(){
+		
+		travellerDao = new TravellerDao();
+	}
+	public Traveller[] listTravellers() throws Fly5Exception, ParseException
 	{
 		Traveller[] travellerDetails=null;
-
+		travellerDetails = travellerDao.listTraveller();
 		return travellerDetails;
 	}
-	public Traveller viewTravellerInfo(long travellerId)
+	public Traveller viewTravellerInfo(long travellerId) throws Fly5Exception
 	{
-		Traveller traveller=null;
+		Traveller traveller = new Traveller();
+		traveller = travellerDao.viewTravellerInfo(travellerId);
 		return traveller;
 	}
-	public boolean 	addTraveller(Traveller traveller)
+	public boolean 	addTraveller(Person person, Traveller traveller) throws Fly5Exception
 	{
 		boolean flag=false;
+		flag = travellerDao.addTraveller(person, traveller);
 		return flag;
 	}
-	public boolean updateTraveller(Traveller traveller)
+	public boolean updateTraveller(Person person , Traveller traveller) throws Fly5Exception
 	{
 		boolean flag=false;
+		flag = travellerDao.updateTraveller(person, traveller);
 		return flag;	
 	}
-	public boolean removeTraveller(long travellerId)
+	public boolean removeTraveller(long travellerId) throws Fly5Exception
 	{
 		boolean flag=false;
+		flag = travellerDao.removeTraveller(travellerId);
 		return flag;
 	}
 
-	public boolean authenticateTraveller(String email,String password)
+	public int authenticateTraveller(String email,String password) throws Fly5Exception
 	{
-		boolean flag=false;
-		return flag;	
+		int id = 0;
+		
+		id = travellerDao.authenticateTraveller(email, password);
+		return id;	
 	}
 
 }

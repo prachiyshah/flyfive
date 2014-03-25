@@ -1,66 +1,64 @@
 package edu.sjsu.fly5.services;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import edu.sjsu.fly5.pojos.Attribute;
+import edu.sjsu.fly5.dao.FlightDao;
 import edu.sjsu.fly5.pojos.Flight;
-
-/*Exceptions/Failure Modes
-Your project MUST properly handle the following failure conditions
-- Creating Duplicate Flights/Journey/Travelers
-- Addresses (for Person) that are not formed properly (see below) */
-/*Further, for all operations defined above, 
- * you need to ensure that if a particular operation fails 
- * (for example, a client requests that a duplicate reservation be created), 
- * your system is left in a consistent state.
- */
+import edu.sjsu.fly5.pojos.FlightInstance;
+import edu.sjsu.fly5.pojos.FlightSearchAttributes;
+import edu.sjsu.fly5.pojos.TravelerInfo;
+import edu.sjsu.fly5.util.Fly5Exception;
 
 @WebService
 public class FlightService 
 {
-
-	public boolean addFlightDetails(Flight flight)
+	FlightDao flightDao = new FlightDao();
+	public FlightService()
 	{
 		
-		boolean flag=false;
-
-		return flag;	
-
 	}
-	public boolean viewFlightDetails(String flightId)
+	
+	@WebMethod
+	public void addFlightDetails(Flight flight) throws Fly5Exception
 	{
-		//Display information about a flight (attributes plus list of customers on board)
-		boolean flag=false;
-
-		return flag;
+		flightDao.createFlight(flight);
 	}
-	public boolean updateFlightDetails(Flight flight)
+	
+	@WebMethod
+	public Flight viewFlightDetails(String flightId) throws Fly5Exception
 	{
-		boolean flag=false;
-
-		return flag;
+		return flightDao.getFlight(flightId);	
 	}
-	public boolean deleteFlightDetails(String flightId)
+	
+	@WebMethod
+	public void updateFlightDetails(Flight flight) throws Fly5Exception
 	{
-		boolean flag=false;
-
-		return flag;	
+		flightDao.updateFlight(flight);
 	}
-	public Flight[] listFlights()
+	
+	@WebMethod
+	public void deleteFlightDetails(String flightId) throws Fly5Exception
 	{
-		Flight[] listOfFlights=null;
-
+		flightDao.deleteFlight(flightId);	
+	}
+	
+	@WebMethod
+	public Flight[] listFlights() throws Fly5Exception
+	{
+		Flight[] listOfFlights= flightDao.getAllFlights();
 		return listOfFlights;
 	}
-	public Flight searchFlight(Attribute[] searchAttributes)
+	
+	@WebMethod
+	public FlightInstance[] searchFlight(FlightSearchAttributes searchAttributes) throws Fly5Exception
 	{
-		Flight flight=null;
-
-
-		return flight;
-
+		return flightDao.searchFlight(searchAttributes);
 	}
-
-
-
+	
+	@WebMethod
+	public TravelerInfo[] getTravellersOnBoard(String flightID,String departureDate) throws Fly5Exception
+	{
+		return flightDao.getListOfCustomersOnBoard(flightID, departureDate);
+	}
 }

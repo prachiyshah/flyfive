@@ -1,33 +1,28 @@
 package edu.sjsu.fly5.pojos;
 
-public class Traveller 
+public class Traveller extends Person
 {
 
-	private String travellerID;
+	private long travellerID;     //Bhavi
 	private String passportNumber;
 	private String nationality;
-	private String personID;
-	
-	
-	
-	
-	
+	private String travellerClass;
+	private String travellerType;
 	
 	public Traveller() {
 		super();
 	}
-	public Traveller(String travellerID, String passportNumber,String nationality, String personID) 
+	public Traveller(long travellerID, String passportNumber,String nationality) 
 	{
 	
 		this.travellerID = travellerID;
 		this.passportNumber = passportNumber;
 		this.nationality = nationality;
-		this.personID = personID;
 	}
-	public String getTravellerID() {
+	public long getTravellerID() {
 		return travellerID;
 	}
-	public void setTravellerID(String travellerID) {
+	public void setTravellerID(long travellerID) {
 		this.travellerID = travellerID;
 	}
 	public String getPassportNumber() {
@@ -42,15 +37,17 @@ public class Traveller
 	public void setNationality(String nationality) {
 		this.nationality = nationality;
 	}
-	public String getPersonID() {
-		return personID;
+	public String getTravellerClass() {
+		return travellerClass;
 	}
-	public void setPersonID(String personID) {
-		this.personID = personID;
+	public void setTravellerClass(String travellerClass) {
+		this.travellerClass = travellerClass;
 	}
-	
-	
-	
-	
+	public String getTravellerType() {
+		return travellerType;
+	}
+	public void setTravellerType(String travellerType) {
+		this.travellerType = travellerType;
+	}
 	
 }

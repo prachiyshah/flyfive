@@ -37,6 +37,13 @@ public class ConnectionFactory {
 		user = ApplicationProperties.getProperty("user");
 		password = ApplicationProperties.getProperty("password");
 	}
+	
+	private void init1(){
+		driver = "com.mysql.jdbc.Driver";
+		connectionUrl = "jdbc:mysql://localhost:3306/fly5";
+		user = "root";
+		password = "root";
+	}
 
 	public Connection getConnection() throws Fly5Exception{
 		Connection con = null;

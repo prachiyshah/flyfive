@@ -18,22 +18,24 @@
         <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:employee" type="tns:Employee"/>
         <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
       </operation>
-      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeEmployee" qname="operNS:removeEmployee" returnQName="retNS:removeEmployeeReturn" returnType="rtns:boolean" soapAction="">
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="viewEmployeeInfo" qname="operNS:viewEmployeeInfo" returnQName="retNS:viewEmployeeInfoReturn" returnType="rtns:Employee" soapAction="">
         <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:employeeID" type="tns:long"/>
         <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
       </operation>
       <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="listEmployees" qname="operNS:listEmployees" returnQName="retNS:listEmployeesReturn" returnType="rtns:Employee" soapAction="">
         <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
       </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeEmployee" qname="operNS:removeEmployee" returnQName="retNS:removeEmployeeReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:employeeID" type="tns:long"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
       <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="searchEmployeesBasedOnAttributes" qname="operNS:searchEmployeesBasedOnAttributes" returnQName="retNS:searchEmployeesBasedOnAttributesReturn" returnType="rtns:Employee" soapAction="">
         <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:attributes" type="tns:Attribute"/>
-      </operation>
-      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="viewEmployeeInfo" qname="operNS:viewEmployeeInfo" returnQName="retNS:viewEmployeeInfoReturn" returnType="rtns:Employee" soapAction="">
-        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:employeeID" type="tns:long"/>
         <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
       </operation>
       <parameter name="allowedMethods" value="removeEmployee searchEmployeesBasedOnAttributes updateEmployee viewEmployeeInfo listEmployees addEmployee"/>
 
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Person" type="java:edu.sjsu.fly5.pojos.Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
       <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Attribute" type="java:edu.sjsu.fly5.pojos.Attribute" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
       <typeMapping xmlns:ns="http://util.fly5.sjsu.edu" qname="ns:Fly5Exception" type="java:edu.sjsu.fly5.util.Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
       <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Employee" type="java:edu.sjsu.fly5.pojos.Employee" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>

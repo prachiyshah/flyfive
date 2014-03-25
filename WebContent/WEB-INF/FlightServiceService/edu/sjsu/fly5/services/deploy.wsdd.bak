@@ -1,0 +1,102 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FlightServiceService WSDL service -->
+
+  <service name="FlightService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+      <parameter name="wsdlServiceElement" value="FlightServiceService"/>
+      <parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+      <parameter name="wsdlServicePort" value="FlightService"/>
+      <parameter name="className" value="edu.sjsu.fly5.services.FlightServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FlightService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="addFlightDetails" qname="operNS:addFlightDetails" xmlns:operNS="http://services.fly5.sjsu.edu" soapAction="" >
+        <parameter qname="pns:flight" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:Flight" xmlns:tns="http://pojos.fly5.sjsu.edu"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="viewFlightDetails" qname="operNS:viewFlightDetails" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:viewFlightDetailsReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:Flight" xmlns:rtns="http://pojos.fly5.sjsu.edu" soapAction="" >
+        <parameter qname="pns:flightId" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="updateFlightDetails" qname="operNS:updateFlightDetails" xmlns:operNS="http://services.fly5.sjsu.edu" soapAction="" >
+        <parameter qname="pns:flight" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:Flight" xmlns:tns="http://pojos.fly5.sjsu.edu"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="deleteFlightDetails" qname="operNS:deleteFlightDetails" xmlns:operNS="http://services.fly5.sjsu.edu" soapAction="" >
+        <parameter qname="pns:flightId" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="getTravellersOnBoard" qname="operNS:getTravellersOnBoard" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:getTravellersOnBoardReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:TravelerInfo" xmlns:rtns="http://pojos.fly5.sjsu.edu" soapAction="" >
+        <parameter qname="pns:flightID" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:departureDate" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="searchFlight" qname="operNS:searchFlight" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:searchFlightReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:FlightInstance" xmlns:rtns="http://pojos.fly5.sjsu.edu" soapAction="" >
+        <parameter qname="pns:searchAttributes" xmlns:pns="http://services.fly5.sjsu.edu" type="tns:FlightSearchAttributes" xmlns:tns="http://pojos.fly5.sjsu.edu"/>
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <operation name="listFlights" qname="operNS:listFlights" xmlns:operNS="http://services.fly5.sjsu.edu" returnQName="retNS:listFlightsReturn" xmlns:retNS="http://services.fly5.sjsu.edu" returnType="rtns:Flight" xmlns:rtns="http://pojos.fly5.sjsu.edu" soapAction="" >
+        <fault name="Fly5Exception" qname="fns:fault" xmlns:fns="http://services.fly5.sjsu.edu" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception" xmlns:tns="http://util.fly5.sjsu.edu"/>
+      </operation>
+      <parameter name="allowedMethods" value="updateFlightDetails searchFlight deleteFlightDetails viewFlightDetails listFlights getTravellersOnBoard addFlightDetails"/>
+
+      <typeMapping
+        xmlns:ns="http://pojos.fly5.sjsu.edu"
+        qname="ns:FlightInstance"
+        type="java:edu.sjsu.fly5.pojos.FlightInstance"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://pojos.fly5.sjsu.edu"
+        qname="ns:TravelerInfo"
+        type="java:edu.sjsu.fly5.pojos.TravelerInfo"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://pojos.fly5.sjsu.edu"
+        qname="ns:Flight"
+        type="java:edu.sjsu.fly5.pojos.Flight"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://util.fly5.sjsu.edu"
+        qname="ns:Fly5Exception"
+        type="java:edu.sjsu.fly5.util.Fly5Exception"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://pojos.fly5.sjsu.edu"
+        qname="ns:FlightSearchAttributes"
+        type="java:edu.sjsu.fly5.pojos.FlightSearchAttributes"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://util.fly5.sjsu.edu"
+        qname="ns:FaultBean"
+        type="java:edu.sjsu.fly5.util.FaultBean"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

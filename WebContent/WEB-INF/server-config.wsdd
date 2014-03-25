@@ -1,0 +1,245 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\JavaWorkSpaces\J2EE_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\fly5\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="FlightService" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="addFlightDetails" qname="ns1:addFlightDetails" soapAction="" xmlns:ns1="http://services.fly5.sjsu.edu" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:flight" type="ns2:Flight" xmlns:ns2="http://pojos.fly5.sjsu.edu" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+   <ns2:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns1:fault" type="ns3:Fly5Exception" xmlns:ns3="http://util.fly5.sjsu.edu"/>
+  </ns2:operation>
+  <ns1:operation name="viewFlightDetails" qname="ns4:viewFlightDetails" returnQName="ns4:viewFlightDetailsReturn" returnType="ns5:Flight" soapAction="" xmlns:ns4="http://services.fly5.sjsu.edu" xmlns:ns5="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns4:flightId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns4:fault" type="ns6:Fly5Exception" xmlns:ns6="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="updateFlightDetails" qname="ns7:updateFlightDetails" soapAction="" xmlns:ns7="http://services.fly5.sjsu.edu">
+   <ns1:parameter qname="ns7:flight" type="ns8:Flight" xmlns:ns8="http://pojos.fly5.sjsu.edu"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns7:fault" type="ns9:Fly5Exception" xmlns:ns9="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="deleteFlightDetails" qname="ns10:deleteFlightDetails" soapAction="" xmlns:ns10="http://services.fly5.sjsu.edu">
+   <ns1:parameter qname="ns10:flightId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns10:fault" type="ns11:Fly5Exception" xmlns:ns11="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="getTravellersOnBoard" qname="ns12:getTravellersOnBoard" returnQName="ns12:getTravellersOnBoardReturn" returnType="ns13:TravelerInfo" soapAction="" xmlns:ns12="http://services.fly5.sjsu.edu" xmlns:ns13="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns12:flightID" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns12:departureDate" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns12:fault" type="ns14:Fly5Exception" xmlns:ns14="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="searchFlight" qname="ns15:searchFlight" returnQName="ns15:searchFlightReturn" returnType="ns16:FlightInstance" soapAction="" xmlns:ns15="http://services.fly5.sjsu.edu" xmlns:ns16="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns15:searchAttributes" type="ns16:FlightSearchAttributes"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns15:fault" type="ns17:Fly5Exception" xmlns:ns17="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="listFlights" qname="ns18:listFlights" returnQName="ns18:listFlightsReturn" returnType="ns19:Flight" soapAction="" xmlns:ns18="http://services.fly5.sjsu.edu" xmlns:ns19="http://pojos.fly5.sjsu.edu">
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns18:fault" type="ns20:Fly5Exception" xmlns:ns20="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="updateFlightDetails searchFlight deleteFlightDetails viewFlightDetails listFlights getTravellersOnBoard addFlightDetails"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="FlightService"/>
+  <ns1:parameter name="className" value="edu.sjsu.fly5.services.FlightService"/>
+  <ns1:parameter name="wsdlServicePort" value="FlightService"/>
+  <ns1:parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlServiceElement" value="FlightServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns21:FlightInstance" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.FlightInstance" xmlns:ns21="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns22:TravelerInfo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.TravelerInfo" xmlns:ns22="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns23:Flight" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Flight" xmlns:ns23="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns24:Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.Fly5Exception" xmlns:ns24="http://util.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns25:FlightSearchAttributes" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.FlightSearchAttributes" xmlns:ns25="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns26:FaultBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.FaultBean" xmlns:ns26="http://util.fly5.sjsu.edu"/>
+ </ns1:service>
+ <ns1:service name="JourneyService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="bookJourney" qname="ns27:bookJourney" returnQName="ns27:bookJourneyReturn" returnType="xsd:boolean" soapAction="" xmlns:ns27="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns27:traveller" type="ns28:Traveller" xmlns:ns28="http://pojos.fly5.sjsu.edu"/>
+   <ns1:parameter qname="ns27:flightInstance" type="ns29:FlightInstance" xmlns:ns29="http://pojos.fly5.sjsu.edu"/>
+   <ns1:parameter qname="ns27:paymentDetails" type="ns30:PaymentDetails" xmlns:ns30="http://pojos.fly5.sjsu.edu"/>
+   <ns1:parameter qname="ns27:person" type="ns31:Person" xmlns:ns31="http://pojos.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="cancelJourney" qname="ns32:cancelJourney" returnQName="ns32:cancelJourneyReturn" returnType="xsd:boolean" soapAction="" xmlns:ns32="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns32:bookingId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="listAllJourneys" qname="ns33:listAllJourneys" returnQName="ns33:listAllJourneysReturn" returnType="ns34:Journey" soapAction="" xmlns:ns33="http://services.fly5.sjsu.edu" xmlns:ns34="http://pojos.fly5.sjsu.edu"/>
+  <ns1:operation name="listAllJourney" qname="ns35:listAllJourney" returnQName="ns35:listAllJourneyReturn" returnType="ns36:Journey" soapAction="" xmlns:ns35="http://services.fly5.sjsu.edu" xmlns:ns36="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns35:userName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="rescheduleJourney" qname="ns37:rescheduleJourney" returnQName="ns37:rescheduleJourneyReturn" returnType="xsd:boolean" soapAction="" xmlns:ns37="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns37:bookingId" type="xsd:string"/>
+   <ns1:parameter qname="ns37:journey" type="ns38:Journey" xmlns:ns38="http://pojos.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="generateItinerary" qname="ns39:generateItinerary" returnQName="ns39:generateItineraryReturn" returnType="ns40:Journey" soapAction="" xmlns:ns39="http://services.fly5.sjsu.edu" xmlns:ns40="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns39:bookingReferenceNo" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns39:lastName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="rescheduleJourney listAllJourney listAllJourneys bookJourney generateItinerary cancelJourney"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="JourneyService"/>
+  <ns1:parameter name="className" value="edu.sjsu.fly5.services.JourneyService"/>
+  <ns1:parameter name="wsdlServicePort" value="JourneyService"/>
+  <ns1:parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlServiceElement" value="JourneyServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns41:PaymentDetails" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.PaymentDetails" xmlns:ns41="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns42:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Person" xmlns:ns42="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns43:Journey" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Journey" xmlns:ns43="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns44:Traveller" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Traveller" xmlns:ns44="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns45:FlightInstance" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.FlightInstance" xmlns:ns45="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns46:Flight" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Flight" xmlns:ns46="http://pojos.fly5.sjsu.edu"/>
+  <ns1:arrayMapping innerType="ns48:Traveller" languageSpecificType="java:edu.sjsu.fly5.pojos.Traveller[]" qname="ns47:ArrayOf_tns1_Traveller" xmlns:ns47="http://services.fly5.sjsu.edu" xmlns:ns48="http://pojos.fly5.sjsu.edu"/>
+  <ns1:arrayMapping innerType="ns50:Flight" languageSpecificType="java:edu.sjsu.fly5.pojos.Flight[]" qname="ns49:ArrayOf_tns1_Flight" xmlns:ns49="http://services.fly5.sjsu.edu" xmlns:ns50="http://pojos.fly5.sjsu.edu"/>
+ </ns1:service>
+ <ns1:service name="CrewService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="viewCrewDetails" qname="ns51:viewCrewDetails" returnQName="ns51:viewCrewDetailsReturn" returnType="ns52:Crew" soapAction="" xmlns:ns51="http://services.fly5.sjsu.edu" xmlns:ns52="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns51:crewID" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns51:fault" type="ns53:Fly5Exception" xmlns:ns53="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="updateCrew" qname="ns54:updateCrew" returnQName="ns54:updateCrewReturn" returnType="xsd:boolean" soapAction="" xmlns:ns54="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns54:crew" type="ns55:Crew" xmlns:ns55="http://pojos.fly5.sjsu.edu"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns54:fault" type="ns56:Fly5Exception" xmlns:ns56="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="removeCrew" qname="ns57:removeCrew" returnQName="ns57:removeCrewReturn" returnType="xsd:boolean" soapAction="" xmlns:ns57="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns57:crewID" type="xsd:long"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns57:fault" type="ns58:Fly5Exception" xmlns:ns58="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="addCrew" qname="ns59:addCrew" returnQName="ns59:addCrewReturn" returnType="xsd:boolean" soapAction="" xmlns:ns59="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns59:crewName" type="xsd:string"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns59:fault" type="ns60:Fly5Exception" xmlns:ns60="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="listcrews" qname="ns61:listcrews" returnQName="ns61:listcrewsReturn" returnType="ns62:Crew" soapAction="" xmlns:ns61="http://services.fly5.sjsu.edu" xmlns:ns62="http://pojos.fly5.sjsu.edu">
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns61:fault" type="ns63:Fly5Exception" xmlns:ns63="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="listcrews updateCrew addCrew removeCrew viewCrewDetails"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="CrewService"/>
+  <ns1:parameter name="className" value="edu.sjsu.fly5.services.CrewService"/>
+  <ns1:parameter name="wsdlServicePort" value="CrewService"/>
+  <ns1:parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlServiceElement" value="CrewServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns64:Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.Fly5Exception" xmlns:ns64="http://util.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns65:FaultBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.FaultBean" xmlns:ns65="http://util.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns66:Crew" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Crew" xmlns:ns66="http://pojos.fly5.sjsu.edu"/>
+ </ns1:service>
+ <ns1:service name="TravellerService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="addTraveller" qname="ns67:addTraveller" returnQName="ns67:addTravellerReturn" returnType="xsd:boolean" soapAction="" xmlns:ns67="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns67:person" type="ns68:Person" xmlns:ns68="http://pojos.fly5.sjsu.edu"/>
+   <ns1:parameter qname="ns67:traveller" type="ns69:Traveller" xmlns:ns69="http://pojos.fly5.sjsu.edu"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns67:fault" type="ns70:Fly5Exception" xmlns:ns70="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="updateTraveller" qname="ns71:updateTraveller" returnQName="ns71:updateTravellerReturn" returnType="xsd:boolean" soapAction="" xmlns:ns71="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns71:person" type="ns72:Person" xmlns:ns72="http://pojos.fly5.sjsu.edu"/>
+   <ns1:parameter qname="ns71:traveller" type="ns73:Traveller" xmlns:ns73="http://pojos.fly5.sjsu.edu"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns71:fault" type="ns74:Fly5Exception" xmlns:ns74="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="removeTraveller" qname="ns75:removeTraveller" returnQName="ns75:removeTravellerReturn" returnType="xsd:boolean" soapAction="" xmlns:ns75="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns75:travellerId" type="xsd:long"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns75:fault" type="ns76:Fly5Exception" xmlns:ns76="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="viewTravellerInfo" qname="ns77:viewTravellerInfo" returnQName="ns77:viewTravellerInfoReturn" returnType="ns78:Traveller" soapAction="" xmlns:ns77="http://services.fly5.sjsu.edu" xmlns:ns78="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns77:travellerId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns77:fault" type="ns79:Fly5Exception" xmlns:ns79="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="listTravellers" qname="ns80:listTravellers" returnQName="ns80:listTravellersReturn" returnType="ns81:Traveller" soapAction="" xmlns:ns80="http://services.fly5.sjsu.edu" xmlns:ns81="http://pojos.fly5.sjsu.edu">
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns80:fault" type="ns82:Fly5Exception" xmlns:ns82="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="authenticateTraveller" qname="ns83:authenticateTraveller" returnQName="ns83:authenticateTravellerReturn" returnType="xsd:int" soapAction="" xmlns:ns83="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns83:email" type="xsd:string"/>
+   <ns1:parameter qname="ns83:password" type="xsd:string"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns83:fault" type="ns84:Fly5Exception" xmlns:ns84="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="addTraveller listTravellers updateTraveller removeTraveller authenticateTraveller viewTravellerInfo"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="TravellerService"/>
+  <ns1:parameter name="className" value="edu.sjsu.fly5.services.TravellerService"/>
+  <ns1:parameter name="wsdlServicePort" value="TravellerService"/>
+  <ns1:parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlServiceElement" value="TravellerServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns85:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Person" xmlns:ns85="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns86:Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.Fly5Exception" xmlns:ns86="http://util.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns87:Traveller" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Traveller" xmlns:ns87="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns88:FaultBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.FaultBean" xmlns:ns88="http://util.fly5.sjsu.edu"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="EmployeeService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="addEmployee" qname="ns89:addEmployee" returnQName="ns89:addEmployeeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns89="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns89:employee" type="ns90:Employee" xmlns:ns90="http://pojos.fly5.sjsu.edu"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns89:fault" type="ns91:Fly5Exception" xmlns:ns91="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="updateEmployee" qname="ns92:updateEmployee" returnQName="ns92:updateEmployeeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns92="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns92:employee" type="ns93:Employee" xmlns:ns93="http://pojos.fly5.sjsu.edu"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns92:fault" type="ns94:Fly5Exception" xmlns:ns94="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="viewEmployeeInfo" qname="ns95:viewEmployeeInfo" returnQName="ns95:viewEmployeeInfoReturn" returnType="ns96:Employee" soapAction="" xmlns:ns95="http://services.fly5.sjsu.edu" xmlns:ns96="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns95:employeeID" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns95:fault" type="ns97:Fly5Exception" xmlns:ns97="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="listEmployees" qname="ns98:listEmployees" returnQName="ns98:listEmployeesReturn" returnType="ns99:Employee" soapAction="" xmlns:ns98="http://services.fly5.sjsu.edu" xmlns:ns99="http://pojos.fly5.sjsu.edu">
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns98:fault" type="ns100:Fly5Exception" xmlns:ns100="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="removeEmployee" qname="ns101:removeEmployee" returnQName="ns101:removeEmployeeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns101="http://services.fly5.sjsu.edu" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns101:employeeID" type="xsd:long"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns101:fault" type="ns102:Fly5Exception" xmlns:ns102="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:operation name="searchEmployeesBasedOnAttributes" qname="ns103:searchEmployeesBasedOnAttributes" returnQName="ns103:searchEmployeesBasedOnAttributesReturn" returnType="ns104:Employee" soapAction="" xmlns:ns103="http://services.fly5.sjsu.edu" xmlns:ns104="http://pojos.fly5.sjsu.edu">
+   <ns1:parameter qname="ns103:attributes" type="ns104:Attribute"/>
+   <ns1:fault class="edu.sjsu.fly5.util.Fly5Exception" qname="ns103:fault" type="ns105:Fly5Exception" xmlns:ns105="http://util.fly5.sjsu.edu"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="removeEmployee searchEmployeesBasedOnAttributes updateEmployee viewEmployeeInfo listEmployees addEmployee"/>
+  <ns1:parameter name="wsdlPortType" value="EmployeeService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlServicePort" value="EmployeeService"/>
+  <ns1:parameter name="className" value="edu.sjsu.fly5.services.EmployeeService"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+  <ns1:parameter name="wsdlServiceElement" value="EmployeeServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns106:Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Person" xmlns:ns106="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns107:Attribute" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Attribute" xmlns:ns107="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns108:Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.Fly5Exception" xmlns:ns108="http://util.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns109:Employee" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.pojos.Employee" xmlns:ns109="http://pojos.fly5.sjsu.edu"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns110:FaultBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:edu.sjsu.fly5.util.FaultBean" xmlns:ns110="http://util.fly5.sjsu.edu"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

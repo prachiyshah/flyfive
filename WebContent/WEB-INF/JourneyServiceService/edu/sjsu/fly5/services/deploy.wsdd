@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from JourneyServiceService WSDL service -->
+
+  <service name="JourneyService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+      <parameter name="wsdlServiceElement" value="JourneyServiceService"/>
+      <parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+      <parameter name="wsdlServicePort" value="JourneyService"/>
+      <parameter name="className" value="edu.sjsu.fly5.services.JourneyService"/>
+      <parameter name="wsdlPortType" value="JourneyService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="bookJourney" qname="operNS:bookJourney" returnQName="retNS:bookJourneyReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:traveller" type="tns:Traveller"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:flightInstance" type="tns:FlightInstance"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:paymentDetails" type="tns:PaymentDetails"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:person" type="tns:Person"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="cancelJourney" qname="operNS:cancelJourney" returnQName="retNS:cancelJourneyReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bookingId" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="listAllJourneys" qname="operNS:listAllJourneys" returnQName="retNS:listAllJourneysReturn" returnType="rtns:Journey" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="listAllJourney" qname="operNS:listAllJourney" returnQName="retNS:listAllJourneyReturn" returnType="rtns:Journey" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userName" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="rescheduleJourney" qname="operNS:rescheduleJourney" returnQName="retNS:rescheduleJourneyReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bookingId" type="tns:string"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:journey" type="tns:Journey"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="generateItinerary" qname="operNS:generateItinerary" returnQName="retNS:generateItineraryReturn" returnType="rtns:Journey" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bookingReferenceNo" type="tns:long"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:lastName" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="rescheduleJourney listAllJourney listAllJourneys bookJourney generateItinerary cancelJourney"/>
+
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:PaymentDetails" type="java:edu.sjsu.fly5.pojos.PaymentDetails" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Person" type="java:edu.sjsu.fly5.pojos.Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://services.fly5.sjsu.edu" xmlns:cmp-ns="http://pojos.fly5.sjsu.edu" qname="ns:ArrayOf_tns1_Traveller" type="java:edu.sjsu.fly5.pojos.Traveller[]" innerType="cmp-ns:Traveller" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Journey" type="java:edu.sjsu.fly5.pojos.Journey" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Traveller" type="java:edu.sjsu.fly5.pojos.Traveller" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:FlightInstance" type="java:edu.sjsu.fly5.pojos.FlightInstance" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://services.fly5.sjsu.edu" xmlns:cmp-ns="http://pojos.fly5.sjsu.edu" qname="ns:ArrayOf_tns1_Flight" type="java:edu.sjsu.fly5.pojos.Flight[]" innerType="cmp-ns:Flight" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Flight" type="java:edu.sjsu.fly5.pojos.Flight" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

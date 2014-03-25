@@ -7,18 +7,19 @@ import java.util.Date;
 
 public class Journey 
 {
-private String bookingReferenceNo;
-private String source;
-private String destination;
-private double totalPrice;
-private String typeOfClass;
+private int bookingReferenceNo; //
+private String source;//
+private String destination;//
+private double totalPrice;//
+private String typeOfClass;//
 private String typeOfTrip;
 private Flight[] listOfFlights;
 private Traveller[] listOfTraveller;
-private Date departureDate;
-private Date arrivalDate;
-private Time arrivalTime;
-private Time departureTime;
+private int noOfTraveller;
+private String departureDate;//
+private String arrivalDate;//
+private String arrivalTime;
+private String departureTime;
 
 
 
@@ -31,11 +32,11 @@ public Journey() {
 
 
 
-public Journey(String bookingReferenceNo, String source, String destination,
+public Journey(int bookingReferenceNo, String source, String destination,
 		double totalPrice, String typeOfClass, String typeOfTrip,
 		Flight[] listOfFlights, Traveller[] listOfTraveller,
-		Date departureDate, Date arrivalDate, Time arrivalTime,
-		Time departureTime) {
+		String departureDate, String arrivalDate, String arrivalTime,
+		String departureTime) {
 
 	this.bookingReferenceNo = bookingReferenceNo;
 	this.source = source;
@@ -53,13 +54,13 @@ public Journey(String bookingReferenceNo, String source, String destination,
 
 
 
-public String getBookingReferenceNo() {
+public int getBookingReferenceNo() {
 	return bookingReferenceNo;
 }
 
 
 
-public void setBookingReferenceNo(String bookingReferenceNo) {
+public void setBookingReferenceNo(int bookingReferenceNo) {
 	this.bookingReferenceNo = bookingReferenceNo;
 }
 
@@ -143,55 +144,67 @@ public Traveller[] getListOfTraveller() {
 
 
 
+public int getNoOfTraveller() {
+	return noOfTraveller;
+}
+
+
+
+public void setNoOfTraveller(int noOfTraveller) {
+	this.noOfTraveller = noOfTraveller;
+}
+
+
+
 public void setListOfTraveller(Traveller[] listOfTraveller) {
 	this.listOfTraveller = listOfTraveller;
 }
 
 
 
-public Date getDepartureDate() {
+public String getDepartureDate() {
 	return departureDate;
 }
 
 
 
-public void setDepartureDate(Date departureDate) {
+public void setDepartureDate(String departureDate) {
 	this.departureDate = departureDate;
 }
 
 
 
-public Date getArrivalDate() {
+public String getArrivalDate() {
 	return arrivalDate;
 }
 
 
 
-public void setArrivalDate(Date arrivalDate) {
+public void setArrivalDate(String arrivalDate) {
 	this.arrivalDate = arrivalDate;
 }
 
 
 
-public Time getArrivalTime() {
+public String getArrivalTime() {
 	return arrivalTime;
 }
 
 
 
-public void setArrivalTime(Time arrivalTime) {
+public void setArrivalTime(String arrivalTime) {
 	this.arrivalTime = arrivalTime;
 }
 
 
 
-public Time getDepartureTime() {
+public String getDepartureTime() {
 	return departureTime;
 }
 
 
 
-public void setDepartureTime(Time departureTime) {
+public void setDepartureTime(String departureTime) {
 	this.departureTime = departureTime;
 }
 

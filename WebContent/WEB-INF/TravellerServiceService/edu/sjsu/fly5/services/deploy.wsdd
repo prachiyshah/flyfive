@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TravellerServiceService WSDL service -->
+
+  <service name="TravellerService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.fly5.sjsu.edu"/>
+      <parameter name="wsdlServiceElement" value="TravellerServiceService"/>
+      <parameter name="schemaQualified" value="http://services.fly5.sjsu.edu,http://util.fly5.sjsu.edu,http://pojos.fly5.sjsu.edu"/>
+      <parameter name="wsdlServicePort" value="TravellerService"/>
+      <parameter name="className" value="edu.sjsu.fly5.services.TravellerService"/>
+      <parameter name="wsdlPortType" value="TravellerService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addTraveller" qname="operNS:addTraveller" returnQName="retNS:addTravellerReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:person" type="tns:Person"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:traveller" type="tns:Traveller"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateTraveller" qname="operNS:updateTraveller" returnQName="retNS:updateTravellerReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:person" type="tns:Person"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://pojos.fly5.sjsu.edu" qname="pns:traveller" type="tns:Traveller"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeTraveller" qname="operNS:removeTraveller" returnQName="retNS:removeTravellerReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:travellerId" type="tns:long"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="viewTravellerInfo" qname="operNS:viewTravellerInfo" returnQName="retNS:viewTravellerInfoReturn" returnType="rtns:Traveller" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:travellerId" type="tns:long"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://pojos.fly5.sjsu.edu" name="listTravellers" qname="operNS:listTravellers" returnQName="retNS:listTravellersReturn" returnType="rtns:Traveller" soapAction="">
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <operation xmlns:operNS="http://services.fly5.sjsu.edu" xmlns:retNS="http://services.fly5.sjsu.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="authenticateTraveller" qname="operNS:authenticateTraveller" returnQName="retNS:authenticateTravellerReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+        <parameter xmlns:pns="http://services.fly5.sjsu.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+        <fault xmlns:fns="http://services.fly5.sjsu.edu" xmlns:tns="http://util.fly5.sjsu.edu" name="Fly5Exception" qname="fns:fault" class="edu.sjsu.fly5.util.Fly5Exception" type="tns:Fly5Exception"/>
+      </operation>
+      <parameter name="allowedMethods" value="addTraveller listTravellers updateTraveller removeTraveller authenticateTraveller viewTravellerInfo"/>
+
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Person" type="java:edu.sjsu.fly5.pojos.Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://util.fly5.sjsu.edu" qname="ns:Fly5Exception" type="java:edu.sjsu.fly5.util.Fly5Exception" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojos.fly5.sjsu.edu" qname="ns:Traveller" type="java:edu.sjsu.fly5.pojos.Traveller" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://util.fly5.sjsu.edu" qname="ns:FaultBean" type="java:edu.sjsu.fly5.util.FaultBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

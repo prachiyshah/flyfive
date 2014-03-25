@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.fly5.sjsu.edu" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.fly5.sjsu.edu" xmlns:intf="http://services.fly5.sjsu.edu" xmlns:tns1="http://pojos.fly5.sjsu.edu" xmlns:tns2="http://util.fly5.sjsu.edu" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://pojos.fly5.sjsu.edu"/>
+   <import namespace="http://util.fly5.sjsu.edu"/>
+   <element name="addFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flight" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addFlightDetailsResponse">
+    <complexType/>
+   </element>
+   <element name="fault" type="tns2:Fly5Exception"/>
+   <element name="viewFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flightId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewFlightDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="viewFlightDetailsReturn" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flight" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateFlightDetailsResponse">
+    <complexType/>
+   </element>
+   <element name="deleteFlightDetails">
+    <complexType>
+     <sequence>
+      <element name="flightId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="deleteFlightDetailsResponse">
+    <complexType/>
+   </element>
+   <element name="getTravellersOnBoard">
+    <complexType>
+     <sequence>
+      <element name="flightID" type="xsd:string"/>
+      <element name="departureDate" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTravellersOnBoardResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getTravellersOnBoardReturn" type="tns1:TravelerInfo"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchFlight">
+    <complexType>
+     <sequence>
+      <element name="searchAttributes" type="tns1:FlightSearchAttributes"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchFlightResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="searchFlightReturn" type="tns1:FlightInstance"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="listFlights">
+    <complexType/>
+   </element>
+   <element name="listFlightsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="listFlightsReturn" type="tns1:Flight"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://pojos.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://util.fly5.sjsu.edu"/>
+   <complexType name="Flight">
+    <sequence>
+     <element name="airline" nillable="true" type="xsd:string"/>
+     <element name="arrivalTime" nillable="true" type="xsd:string"/>
+     <element name="baseFare" type="xsd:double"/>
+     <element name="crewID" type="xsd:long"/>
+     <element name="departureTime" nillable="true" type="xsd:string"/>
+     <element name="destination" nillable="true" type="xsd:string"/>
+     <element name="distance" type="xsd:long"/>
+     <element name="flightID" nillable="true" type="xsd:string"/>
+     <element name="flightStatus" nillable="true" type="xsd:string"/>
+     <element name="frequency" nillable="true" type="xsd:string"/>
+     <element name="journeyTime" nillable="true" type="xsd:string"/>
+     <element name="noOfSeats" type="xsd:int"/>
+     <element name="source" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="TravelerInfo">
+    <sequence>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="ticket_no" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="FlightSearchAttributes">
+    <sequence>
+     <element name="adults" type="xsd:int"/>
+     <element name="children" type="xsd:int"/>
+     <element name="departureDate" nillable="true" type="xsd:string"/>
+     <element name="destination" nillable="true" type="xsd:string"/>
+     <element name="infants" type="xsd:int"/>
+     <element name="source" nillable="true" type="xsd:string"/>
+     <element name="travelClass" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="FlightInstance">
+    <sequence>
+     <element name="adultFare" type="xsd:float"/>
+     <element name="arrivalDate" nillable="true" type="xsd:string"/>
+     <element name="arrivalTime" nillable="true" type="xsd:string"/>
+     <element name="availableTickets" type="xsd:int"/>
+     <element name="departureDate" nillable="true" type="xsd:string"/>
+     <element name="departuteTime" nillable="true" type="xsd:string"/>
+     <element name="destination" nillable="true" type="xsd:string"/>
+     <element name="distance" type="xsd:float"/>
+     <element name="flight_no" nillable="true" type="xsd:string"/>
+     <element name="journeyTime" nillable="true" type="xsd:string"/>
+     <element name="source" nillable="true" type="xsd:string"/>
+     <element name="totalSeats" type="xsd:int"/>
+     <element name="travelClass" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://util.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://pojos.fly5.sjsu.edu"/>
+   <complexType name="FaultBean">
+    <sequence>
+     <element name="faultMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Fly5Exception">
+    <sequence>
+     <element name="faultBean" nillable="true" type="tns2:FaultBean"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="searchFlightRequest">
+
+      <wsdl:part element="impl:searchFlight" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteFlightDetailsRequest">
+
+      <wsdl:part element="impl:deleteFlightDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateFlightDetailsResponse">
+
+      <wsdl:part element="impl:updateFlightDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listFlightsResponse">
+
+      <wsdl:part element="impl:listFlightsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTravellersOnBoardRequest">
+
+      <wsdl:part element="impl:getTravellersOnBoard" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listFlightsRequest">
+
+      <wsdl:part element="impl:listFlights" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTravellersOnBoardResponse">
+
+      <wsdl:part element="impl:getTravellersOnBoardResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewFlightDetailsResponse">
+
+      <wsdl:part element="impl:viewFlightDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addFlightDetailsRequest">
+
+      <wsdl:part element="impl:addFlightDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addFlightDetailsResponse">
+
+      <wsdl:part element="impl:addFlightDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewFlightDetailsRequest">
+
+      <wsdl:part element="impl:viewFlightDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteFlightDetailsResponse">
+
+      <wsdl:part element="impl:deleteFlightDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateFlightDetailsRequest">
+
+      <wsdl:part element="impl:updateFlightDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="Fly5Exception">
+
+      <wsdl:part element="impl:fault" name="fault">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="searchFlightResponse">
+
+      <wsdl:part element="impl:searchFlightResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="FlightService">
+
+      <wsdl:operation name="addFlightDetails">
+
+         <wsdl:input message="impl:addFlightDetailsRequest" name="addFlightDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addFlightDetailsResponse" name="addFlightDetailsResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viewFlightDetails">
+
+         <wsdl:input message="impl:viewFlightDetailsRequest" name="viewFlightDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:viewFlightDetailsResponse" name="viewFlightDetailsResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateFlightDetails">
+
+         <wsdl:input message="impl:updateFlightDetailsRequest" name="updateFlightDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:updateFlightDetailsResponse" name="updateFlightDetailsResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteFlightDetails">
+
+         <wsdl:input message="impl:deleteFlightDetailsRequest" name="deleteFlightDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:deleteFlightDetailsResponse" name="deleteFlightDetailsResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTravellersOnBoard">
+
+         <wsdl:input message="impl:getTravellersOnBoardRequest" name="getTravellersOnBoardRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTravellersOnBoardResponse" name="getTravellersOnBoardResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchFlight">
+
+         <wsdl:input message="impl:searchFlightRequest" name="searchFlightRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:searchFlightResponse" name="searchFlightResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listFlights">
+
+         <wsdl:input message="impl:listFlightsRequest" name="listFlightsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:listFlightsResponse" name="listFlightsResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="FlightServiceSoapBinding" type="impl:FlightService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="addFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viewFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="viewFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="viewFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deleteFlightDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteFlightDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteFlightDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTravellersOnBoard">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTravellersOnBoardRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTravellersOnBoardResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="searchFlight">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="searchFlightRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="searchFlightResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listFlights">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listFlightsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listFlightsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="FlightServiceService">
+
+      <wsdl:port binding="impl:FlightServiceSoapBinding" name="FlightService">
+
+         <wsdlsoap:address location="http://localhost:8080/fly5/services/FlightService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -35,44 +35,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="removeEmployee">
-    <complexType>
-     <sequence>
-      <element name="employeeID" type="xsd:long"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeEmployeeResponse">
-    <complexType>
-     <sequence>
-      <element name="removeEmployeeReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="listEmployees">
-    <complexType/>
-   </element>
-   <element name="listEmployeesResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="listEmployeesReturn" type="tns1:Employee"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="searchEmployeesBasedOnAttributes">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="attributes" type="tns1:Attribute"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="searchEmployeesBasedOnAttributesResponse">
-    <complexType>
-     <sequence>
-      <element name="searchEmployeesBasedOnAttributesReturn" type="tns1:Employee"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="viewEmployeeInfo">
     <complexType>
      <sequence>
@@ -87,18 +49,73 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="listEmployees">
+    <complexType/>
+   </element>
+   <element name="listEmployeesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="listEmployeesReturn" type="tns1:Employee"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeEmployee">
+    <complexType>
+     <sequence>
+      <element name="employeeID" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeEmployeeResponse">
+    <complexType>
+     <sequence>
+      <element name="removeEmployeeReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchEmployeesBasedOnAttributes">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="attributes" type="tns1:Attribute"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="searchEmployeesBasedOnAttributesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="searchEmployeesBasedOnAttributesReturn" type="tns1:Employee"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
   <schema elementFormDefault="qualified" targetNamespace="http://pojos.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://util.fly5.sjsu.edu"/>
-   <complexType name="Employee">
+   <complexType name="Person">
     <sequence>
-     <element name="crewID" type="xsd:long"/>
-     <element name="designation" nillable="true" type="xsd:string"/>
-     <element name="employeeID" type="xsd:long"/>
-     <element name="hireDate" nillable="true" type="xsd:string"/>
-     <element name="personID" nillable="true" type="xsd:string"/>
-     <element name="workDescription" nillable="true" type="xsd:string"/>
+     <element name="address" nillable="true" type="xsd:string"/>
+     <element name="city" nillable="true" type="xsd:string"/>
+     <element name="dateOfBirth" nillable="true" type="xsd:dateTime"/>
+     <element name="emailAddress" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="lastName" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="personID" type="xsd:long"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+     <element name="zipcode" type="xsd:long"/>
     </sequence>
+   </complexType>
+   <complexType name="Employee">
+    <complexContent>
+     <extension base="tns1:Person">
+      <sequence>
+       <element name="crewID" type="xsd:long"/>
+       <element name="designation" nillable="true" type="xsd:string"/>
+       <element name="employeeID" type="xsd:long"/>
+       <element name="hireDate" nillable="true" type="xsd:dateTime"/>
+       <element name="workDescription" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
    </complexType>
    <complexType name="Attribute">
     <sequence>
@@ -122,33 +139,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="addEmployeeResponse">
-
-      <wsdl:part element="impl:addEmployeeResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="removeEmployeeRequest">
-
-      <wsdl:part element="impl:removeEmployee" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="addEmployeeRequest">
-
-      <wsdl:part element="impl:addEmployee" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="searchEmployeesBasedOnAttributesRequest">
 
       <wsdl:part element="impl:searchEmployeesBasedOnAttributes" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addEmployeeResponse">
+
+      <wsdl:part element="impl:addEmployeeResponse" name="parameters">
 
       </wsdl:part>
 
@@ -178,9 +179,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="removeEmployeeRequest">
+
+      <wsdl:part element="impl:removeEmployee" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="viewEmployeeInfoResponse">
 
       <wsdl:part element="impl:viewEmployeeInfoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addEmployeeRequest">
+
+      <wsdl:part element="impl:addEmployee" name="parameters">
 
       </wsdl:part>
 
@@ -260,13 +277,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeEmployee">
+      <wsdl:operation name="viewEmployeeInfo">
 
-         <wsdl:input message="impl:removeEmployeeRequest" name="removeEmployeeRequest">
+         <wsdl:input message="impl:viewEmployeeInfoRequest" name="viewEmployeeInfoRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:removeEmployeeResponse" name="removeEmployeeResponse">
+         <wsdl:output message="impl:viewEmployeeInfoResponse" name="viewEmployeeInfoResponse">
 
        </wsdl:output>
 
@@ -292,6 +309,22 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="removeEmployee">
+
+         <wsdl:input message="impl:removeEmployeeRequest" name="removeEmployeeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeEmployeeResponse" name="removeEmployeeResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
       <wsdl:operation name="searchEmployeesBasedOnAttributes">
 
          <wsdl:input message="impl:searchEmployeesBasedOnAttributesRequest" name="searchEmployeesBasedOnAttributesRequest">
@@ -299,18 +332,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:searchEmployeesBasedOnAttributesResponse" name="searchEmployeesBasedOnAttributesResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="viewEmployeeInfo">
-
-         <wsdl:input message="impl:viewEmployeeInfoRequest" name="viewEmployeeInfoRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:viewEmployeeInfoResponse" name="viewEmployeeInfoResponse">
 
        </wsdl:output>
 
@@ -374,17 +395,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeEmployee">
+      <wsdl:operation name="viewEmployeeInfo">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="removeEmployeeRequest">
+         <wsdl:input name="viewEmployeeInfoRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="removeEmployeeResponse">
+         <wsdl:output name="viewEmployeeInfoResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -422,6 +443,30 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="removeEmployee">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeEmployeeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeEmployeeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
       <wsdl:operation name="searchEmployeesBasedOnAttributes">
 
          <wsdlsoap:operation soapAction=""/>
@@ -433,24 +478,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="searchEmployeesBasedOnAttributesResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="viewEmployeeInfo">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="viewEmployeeInfoRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="viewEmployeeInfoResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -470,7 +497,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdl:port binding="impl:EmployeeServiceSoapBinding" name="EmployeeService">
 
-         <wsdlsoap:address location="http://localhost:98/fly5/services/EmployeeService"/>
+         <wsdlsoap:address location="http://localhost:8080/fly5/services/EmployeeService"/>
 
       </wsdl:port>
 

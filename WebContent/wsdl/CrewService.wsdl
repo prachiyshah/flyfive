@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://services.fly5.sjsu.edu" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://services.fly5.sjsu.edu" xmlns:intf="http://services.fly5.sjsu.edu" xmlns:tns1="http://pojos.fly5.sjsu.edu" xmlns:tns2="http://util.fly5.sjsu.edu" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://services.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://pojos.fly5.sjsu.edu"/>
+   <import namespace="http://util.fly5.sjsu.edu"/>
+   <element name="viewCrewDetails">
+    <complexType>
+     <sequence>
+      <element name="crewID" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viewCrewDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="viewCrewDetailsReturn" type="tns1:Crew"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="fault" type="tns2:Fly5Exception"/>
+   <element name="updateCrew">
+    <complexType>
+     <sequence>
+      <element name="crew" type="tns1:Crew"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="updateCrewResponse">
+    <complexType>
+     <sequence>
+      <element name="updateCrewReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeCrew">
+    <complexType>
+     <sequence>
+      <element name="crewID" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeCrewResponse">
+    <complexType>
+     <sequence>
+      <element name="removeCrewReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCrew">
+    <complexType>
+     <sequence>
+      <element name="crewName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addCrewResponse">
+    <complexType>
+     <sequence>
+      <element name="addCrewReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="listcrews">
+    <complexType/>
+   </element>
+   <element name="listcrewsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="listcrewsReturn" type="tns1:Crew"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://pojos.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://util.fly5.sjsu.edu"/>
+   <complexType name="Crew">
+    <sequence>
+     <element name="crewID" type="xsd:long"/>
+     <element name="crewName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://util.fly5.sjsu.edu" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://pojos.fly5.sjsu.edu"/>
+   <complexType name="FaultBean">
+    <sequence>
+     <element name="faultMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Fly5Exception">
+    <sequence>
+     <element name="faultBean" nillable="true" type="tns2:FaultBean"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="listcrewsResponse">
+
+      <wsdl:part element="impl:listcrewsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listcrewsRequest">
+
+      <wsdl:part element="impl:listcrews" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addCrewResponse">
+
+      <wsdl:part element="impl:addCrewResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeCrewResponse">
+
+      <wsdl:part element="impl:removeCrewResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewCrewDetailsResponse">
+
+      <wsdl:part element="impl:viewCrewDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viewCrewDetailsRequest">
+
+      <wsdl:part element="impl:viewCrewDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateCrewResponse">
+
+      <wsdl:part element="impl:updateCrewResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="updateCrewRequest">
+
+      <wsdl:part element="impl:updateCrew" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addCrewRequest">
+
+      <wsdl:part element="impl:addCrew" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="Fly5Exception">
+
+      <wsdl:part element="impl:fault" name="fault">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeCrewRequest">
+
+      <wsdl:part element="impl:removeCrew" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CrewService">
+
+      <wsdl:operation name="viewCrewDetails">
+
+         <wsdl:input message="impl:viewCrewDetailsRequest" name="viewCrewDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:viewCrewDetailsResponse" name="viewCrewDetailsResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateCrew">
+
+         <wsdl:input message="impl:updateCrewRequest" name="updateCrewRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:updateCrewResponse" name="updateCrewResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeCrew">
+
+         <wsdl:input message="impl:removeCrewRequest" name="removeCrewRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeCrewResponse" name="removeCrewResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCrew">
+
+         <wsdl:input message="impl:addCrewRequest" name="addCrewRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addCrewResponse" name="addCrewResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listcrews">
+
+         <wsdl:input message="impl:listcrewsRequest" name="listcrewsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:listcrewsResponse" name="listcrewsResponse">
+
+       </wsdl:output>
+
+         <wsdl:fault message="impl:Fly5Exception" name="Fly5Exception">
+
+       </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CrewServiceSoapBinding" type="impl:CrewService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="viewCrewDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="viewCrewDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="viewCrewDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="updateCrew">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="updateCrewRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="updateCrewResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeCrew">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeCrewRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeCrewResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addCrew">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addCrewRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addCrewResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listcrews">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listcrewsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listcrewsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+         <wsdl:fault name="Fly5Exception">
+
+            <wsdlsoap:fault name="Fly5Exception" use="literal"/>
+
+         </wsdl:fault>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CrewServiceService">
+
+      <wsdl:port binding="impl:CrewServiceSoapBinding" name="CrewService">
+
+         <wsdlsoap:address location="http://localhost:8080/fly5/services/CrewService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
